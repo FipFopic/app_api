@@ -9,7 +9,7 @@ const { combine, timestamp, printf, prettyPrint, colorize, json, errors } =
 
 const logDirectory = 'logs'
 const filename = join(logDirectory, 'app-%DATE%.log')
-const level = config.server.isProduction() ? 'error' : 'debug'
+const level = config.app.isProduction() ? 'error' : 'debug'
 
 if (!existsSync(logDirectory)) {
   mkdirSync(logDirectory)
