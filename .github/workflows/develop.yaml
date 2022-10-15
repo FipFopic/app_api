@@ -9,6 +9,7 @@ env:
   API_VERSION: '1.0.0'
 
 jobs:
+
   build:
     if: "!contains(github.event.commits[0].message, '[skip ci]')"
     name: Build
@@ -36,3 +37,28 @@ jobs:
 
       - name: Print new build number
         run: echo "Build number is $GITHUB_RUN_NUMBER"
+
+  docker-build:
+    if: "!contains(github.event.commits[0].message, '[skip ci]') && github.ref == 'refs/heads/main'"
+    name: Docker Build
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag api-sueta:$(date +%s)
+
+#  deploy-dev:
+#    if: "!contains(github.event.commits[0].message, '[skip ci]') && github.ref == 'refs/heads/main'"
+#    name: Deploy Dev
+#    needs: [ build, docker-build ]
+#    runs-on: ubuntu-latest
+#    enviroments: 'dev'
+#    steps:
+#      - name: Install SSH Key
+#          uses: shimataro/ssh-key-action@v3
+#          with:
+#            key: ${{ secrets.SSH }}
+#
+#      - name: Deploy with rsync
+#        run: rsync -avz ./dist/ root@176.53.162.22:/api/dist/
