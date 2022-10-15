@@ -40,12 +40,12 @@ jobs:
 
       - name: Server
         uses: appleboy/ssh-action@master
-          with:
-            host: ${{ secrets.HOST }}
-            username: ${{ secrets.USERNAME }}
-            password: ${{ secrets.PASSWORD }}
-            port: ${{ secrets.PORT }}
-            script: whoami
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: whoami
 
 #  docker-build:
 #    if: "!contains(github.event.commits[0].message, '[skip ci]') && github.ref == 'refs/heads/main'"
