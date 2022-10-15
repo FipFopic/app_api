@@ -4,11 +4,14 @@ import {
   NestModule,
   RequestMethod
 } from '@nestjs/common'
+import { MongooseModule } from '@nestjs/mongoose'
+import { config } from './config/config'
+import { AuthModule } from './modules/auth/auth.module'
 
 import { ConnectTimeoutMiddleware } from './utils/middlewares/connect-timeout.middleware'
 
 @Module({
-  imports: [],
+  imports: [MongooseModule.forRoot(config.database.getMongoURI()), AuthModule],
   controllers: [],
   providers: []
 })
