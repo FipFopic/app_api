@@ -1,7 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
+import { Exclude } from 'class-transformer'
 import { Document } from 'mongoose'
-
-import { UserDetails } from './user-details.schema'
 
 export enum UserStatus {
   ACTIVE = 'ACTIVE',
@@ -26,6 +25,7 @@ export class User {
     required: true,
     trim: true
   })
+  @Exclude()
   password: string
 
   @Prop({
@@ -47,11 +47,6 @@ export class User {
   })
   status: UserStatus
 
-  @Prop({
-    type: UserDetails,
-    ref: UserDetails.name
-  })
-  details: UserDetails
 }
 
 export type UserDocument = User & Document
