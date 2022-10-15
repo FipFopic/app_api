@@ -38,15 +38,19 @@ jobs:
       - name: Print new build number
         run: echo "Build number is $GITHUB_RUN_NUMBER"
 
-  docker-build:
-    if: "!contains(github.event.commits[0].message, '[skip ci]') && github.ref == 'refs/heads/main'"
-    name: Docker Build
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag api-sueta:$(date +%s)
+      - name: Server
+        run: |
+          ssh ${{ secrets.SSH }} root@176.53.162.22
+
+#  docker-build:
+#    if: "!contains(github.event.commits[0].message, '[skip ci]') && github.ref == 'refs/heads/main'"
+#    name: Docker Build
+#    needs: build
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v3
+#      - name: Build the Docker image
+#        run: docker build --tag backend .
 
 #  deploy-dev:
 #    if: "!contains(github.event.commits[0].message, '[skip ci]') && github.ref == 'refs/heads/main'"
