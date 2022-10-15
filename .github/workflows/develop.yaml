@@ -31,9 +31,9 @@ jobs:
           npm ci
           npm run build --if-present
 
-      - name: Lint code
-        run: |
-          npm run lint
+#      - name: Lint code
+#        run: |
+#          npm run lint
 
       - name: Print new build number
         run: echo "Build number is $GITHUB_RUN_NUMBER"
