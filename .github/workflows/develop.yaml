@@ -39,8 +39,13 @@ jobs:
         run: echo "Build number is $GITHUB_RUN_NUMBER"
 
       - name: Server
-        run: |
-          ssh ${{ secrets.SSH }} root@176.53.162.22
+        uses: appleboy/ssh-action@master
+          with:
+            host: ${{ secrets.HOST }}
+            username: ${{ secrets.USERNAME }}
+            password: ${{ secrets.PASSWORD }}
+            port: ${{ secrets.PORT }}
+            script: whoami
 
 #  docker-build:
 #    if: "!contains(github.event.commits[0].message, '[skip ci]') && github.ref == 'refs/heads/main'"
