@@ -4,10 +4,12 @@ import {
   NestModule,
   RequestMethod
 } from '@nestjs/common'
+import { MongooseModule } from '@nestjs/mongoose'
+import { config } from './config/config'
 import { AuthModule } from './modules/auth/auth.module'
 
 @Module({
-  imports: [AuthModule],
+  imports: [MongooseModule.forRoot(config.database.getMongoURI()), AuthModule],
   controllers: [],
   providers: []
 })

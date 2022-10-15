@@ -1,4 +1,4 @@
-import dotenv from 'dotenv'
+import * as dotenv from 'dotenv'
 
 dotenv.config({ path: `.env` })
 
@@ -17,5 +17,8 @@ export const env = {
     SWAGGER_TITLE: 'App API',
     SWAGGER_VERSION: '1.0.0',
     SWAGGER_PREFIX: 'docs/v1'
+  },
+  database: {
+    mongoURI: `mongodb+srv://dmor:fHPINjU0GIL41XUp@cluster0.vtew2.mongodb.net/sueta_api`
   }
 }
