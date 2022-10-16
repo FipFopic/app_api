@@ -51,8 +51,8 @@ jobs:
           PORT: ${{ secrets.APP_PORT }}
           PASSWORD: ${{ secrets.PASSWORD }}
         with:
-          source: "."
-          target: "/root/test"
+          source: "dist, node_modules"
+          target: "/root/backend/app"
 
   run-docker:
     if: "!contains(github.event.commits[0].message, '[skip ci]') && github.ref == 'refs/heads/main'"
