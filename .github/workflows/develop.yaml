@@ -46,18 +46,18 @@ jobs:
         env:
           HOST: ${{ secrets.HOST }}
           USERNAME: ${{ secrets.USERNAME }}
-          PORT: ${{ secrets.PORT }}
+          PORT: ${{ secrets.APP_PORT }}
           KEY: ${{ secrets.KEY }}
         with:
           source: "."
-          target: "/your/website/directory"
+          target: "/test_directory"
 
       - name: Executing remote command
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           USERNAME: ${{ secrets.USERNAME }}
-          PORT: ${{ secrets.PORT }}
+          PORT: ${{ secrets.APP_PORT }}
           KEY: ${{ secrets.KEY }}
           script: ls
 
