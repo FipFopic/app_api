@@ -35,29 +35,15 @@ jobs:
 #        run: |
 #          npm run lint
 
-  docker-build:
+  deploy-sever:
     if: "!contains(github.event.commits[0].message, '[skip ci]') && github.ref == 'refs/heads/main'"
-    name: Docker Build
-    needs: build
+    name: Deploy to server
+    needs: [ build ]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Build the Docker image
-        run: docker build --tag backend .
+      uses: actions/checkout@v3
 
-  deploy-dev:
-    if: "!contains(github.event.commits[0].message, '[skip ci]') && github.ref == 'refs/heads/main'"
-    name: Deploy Dev
-    needs: [ build, docker-build ]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Executing remote command
-        uses: actions/checkout@v3
-
-      - name: Docker Images
-        run: docker images
-
-      - name: Copy repository contents via scp
+      - name: Copy files
         uses: appleboy/scp-action@master
         env:
           HOST: ${{ secrets.HOST }}
@@ -66,7 +52,15 @@ jobs:
           KEY: ${{ secrets.KEY }}
         with:
           source: "."
-          target: "/root/test_directory"
+          target: "/root/backend/app"
+
+  run-docker:
+    if: "!contains(github.event.commits[0].message, '[skip ci]') && github.ref == 'refs/heads/main'"
+    name: Deploy to server
+    needs: [ build, deploy-sever ]
+    runs-on: ubuntu-latest
+    steps:
+      uses: actions/checkout@v3
 
       - name: Executing remote command
         uses: appleboy/ssh-action@master
