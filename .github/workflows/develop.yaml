@@ -64,4 +64,7 @@ jobs:
           USERNAME: ${{ secrets.USERNAME }}
           PORT: ${{ secrets.APP_PORT }}
           PASSWORD: ${{ secrets.PASSWORD }}
-          script: docker ps
+          script: |
+            cd /root/backend/app &&
+            nvm use 16 &&
+            npm ci && npm build
