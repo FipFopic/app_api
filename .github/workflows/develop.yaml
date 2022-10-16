@@ -51,7 +51,7 @@ jobs:
           PORT: ${{ secrets.APP_PORT }}
           PASSWORD: ${{ secrets.PASSWORD }}
         with:
-          source: "dist, node_modules"
+          source: "."
           target: "/root/backend/app"
 
   run-docker:
