@@ -41,7 +41,7 @@ jobs:
       - name: Archive files
         run: |
           mkdir ../build
-          cp -TR dist package.json ../build
+          cp -TR . ../build
           tar -cvf deploy.tar ../build/
 
       - name: Copy files
