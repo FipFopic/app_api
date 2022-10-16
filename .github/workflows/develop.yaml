@@ -71,5 +71,8 @@ jobs:
           PORT: ${{ secrets.APP_PORT }}
           PASSWORD: ${{ secrets.PASSWORD }}
           script: |
-            cd /root/backend/app &&
-            npm ci && npm build
+            cd /root/backend/app
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            npm ci
+            npm build
