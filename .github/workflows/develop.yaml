@@ -46,6 +46,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Ls
+        run: ls
+
       - name: Copy files
         uses: appleboy/scp-action@master
         env:
