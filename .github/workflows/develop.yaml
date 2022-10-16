@@ -47,7 +47,7 @@ jobs:
         run: |
           mkdir ../build
           cp -TR ./dist ../build/dist
-          cp -TR ./package.json ../build
+          cp ./package.json ../build
           tar -cvf deploy.tar ../build/
 
       - name: Copy files
