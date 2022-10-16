@@ -81,6 +81,7 @@ jobs:
           PASSWORD: ${{ secrets.PASSWORD }}
           script: |
             cd /root/backend/app
+            ls | grep -v deploy.tar | xargs rm -rfv
             tar -xvf deploy.tar
             rm deploy.tar
             cd build
