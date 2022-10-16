@@ -46,11 +46,11 @@ jobs:
       - name: Archive files
         run: |
           mkdir ../build
-          cp -TR ./dist ../build/dist
           cp ./package.json ../build
           cp ./package-lock.json ../build
           cp ./tsconfig.build.json ../build
           cp ./tsconfig.json ../build
+          cp -TR ./dist ../build/dist
           tar -cvf deploy.tar ../build/
 
       - name: Copy files
