@@ -20,26 +20,26 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Starting Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+#      - name: Starting Node.js ${{ matrix.node-version }}
+#        uses: actions/setup-node@v3
+#        with:
+#          node-version: ${{ matrix.node-version }}
+#          cache: 'npm'
 
-      - name: Install modules, build
-        run: |
-          npm ci
-          npm run build --if-present
+#      - name: Install modules, build
+#        run: |
+#          npm ci
+#          npm run build --if-present
 
 #      - name: Lint code
 #        run: |
 #          npm run lint
 
       - name: Print new build number
-        run: echo "Build number is $GITHUB_RUN_NUMBER"
+        run: echo "Build number is ${{ GITHUB_RUN_NUMBER }}"
 
       - name: Executing remote command
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
 
       - name: Copy repository contents via scp
         uses: appleboy/scp-action@master
