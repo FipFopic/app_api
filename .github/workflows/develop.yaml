@@ -52,11 +52,11 @@ jobs:
           KEY: ${{ secrets.KEY }}
         with:
           source: "."
-          target: "/root/backend/app"
+          target: "."
 
   run-docker:
     if: "!contains(github.event.commits[0].message, '[skip ci]') && github.ref == 'refs/heads/main'"
-    name: Deploy to server
+    name: Run docker
     needs: [ build, deploy-sever ]
     runs-on: ubuntu-latest
     steps:
