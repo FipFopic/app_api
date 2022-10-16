@@ -60,7 +60,7 @@ jobs:
     needs: [ build, deploy-sever ]
     runs-on: ubuntu-latest
     steps:
-      uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: Executing remote command
         uses: appleboy/ssh-action@master
