@@ -72,7 +72,9 @@ jobs:
           PASSWORD: ${{ secrets.PASSWORD }}
           script: |
             cd /root/backend/app
+            ls
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
+            nvm use 16
             npm ci
             npm build
