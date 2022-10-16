@@ -20,24 +20,38 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-#      - name: Starting Node.js ${{ matrix.node-version }}
-#        uses: actions/setup-node@v3
-#        with:
-#          node-version: ${{ matrix.node-version }}
-#          cache: 'npm'
+      - name: Starting Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
 
-#      - name: Install modules, build
-#        run: |
-#          npm ci
-#          npm run build --if-present
+      - name: Install modules, build
+        run: |
+          npm ci
+          npm run build --if-present
 
 #      - name: Lint code
 #        run: |
 #          npm run lint
 
-      - name: Print new build number
-        run: echo "Build number is $GITHUB_RUN_NUMBER"
+  docker-build:
+    if: "!contains(github.event.commits[0].message, '[skip ci]') && github.ref == 'refs/heads/main'"
+    name: Docker Build
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build the Docker image
+        run: docker build --tag backend .
 
+  deploy-dev:
+    if: "!contains(github.event.commits[0].message, '[skip ci]') && github.ref == 'refs/heads/main'"
+    name: Deploy Dev
+    needs: [ build, docker-build ]
+    runs-on: ubuntu-latest
+    enviroments: 'dev'
+    steps:
       - name: Executing remote command
         uses: actions/checkout@v3
 
@@ -50,7 +64,7 @@ jobs:
           KEY: ${{ secrets.KEY }}
         with:
           source: "."
-          target: "/test_directory"
+          target: "/root/test_directory"
 
       - name: Executing remote command
         uses: appleboy/ssh-action@master
@@ -60,28 +74,3 @@ jobs:
           PORT: ${{ secrets.APP_PORT }}
           KEY: ${{ secrets.KEY }}
           script: ls
-
-#  docker-build:
-#    if: "!contains(github.event.commits[0].message, '[skip ci]') && github.ref == 'refs/heads/main'"
-#    name: Docker Build
-#    needs: build
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v3
-#      - name: Build the Docker image
-#        run: docker build --tag backend .
-
-#  deploy-dev:
-#    if: "!contains(github.event.commits[0].message, '[skip ci]') && github.ref == 'refs/heads/main'"
-#    name: Deploy Dev
-#    needs: [ build, docker-build ]
-#    runs-on: ubuntu-latest
-#    enviroments: 'dev'
-#    steps:
-#      - name: Install SSH Key
-#          uses: shimataro/ssh-key-action@v3
-#          with:
-#            key: ${{ secrets.SSH }}
-#
-#      - name: Deploy with rsync
-#        run: rsync -avz ./dist/ root@176.53.162.22:/api/dist/
