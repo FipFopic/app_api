@@ -52,7 +52,7 @@ jobs:
           KEY: ${{ secrets.KEY }}
         with:
           source: "."
-          target: "."
+          target: "/"
 
   run-docker:
     if: "!contains(github.event.commits[0].message, '[skip ci]') && github.ref == 'refs/heads/main'"
