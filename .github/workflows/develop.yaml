@@ -89,4 +89,3 @@ jobs:
             source ~/.nvm/nvm.sh
             nvm use 16
             npm ci
-            npm run build
