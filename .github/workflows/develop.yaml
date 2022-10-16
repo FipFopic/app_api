@@ -49,7 +49,7 @@ jobs:
           HOST: ${{ secrets.HOST }}
           USERNAME: ${{ secrets.USERNAME }}
           PORT: ${{ secrets.APP_PORT }}
-          KEY: ${{ secrets.KEY }}
+          PASSWORS: ${{ secrets.PASSWORS }}
         with:
           source: "."
           target: "/root/test"
@@ -68,5 +68,5 @@ jobs:
           host: ${{ secrets.HOST }}
           USERNAME: ${{ secrets.USERNAME }}
           PORT: ${{ secrets.APP_PORT }}
-          KEY: ${{ secrets.KEY }}
+          PASSWORS: ${{ secrets.PASSWORS }}
           script: ls
