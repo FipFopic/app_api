@@ -78,9 +78,7 @@ jobs:
           PASSWORD: ${{ secrets.PASSWORD }}
           script: |
             cd /root/backend/app
-#           Распаковка архива
             ls | grep -v deploy.tar | xargs rm -rfv
-#           Удаление архива
             rm deploy.tar
             cd build
             export NVM_DIR=~/.nvm
