@@ -37,8 +37,9 @@ jobs:
 
       - name: Archive files
         run: |
+          ls
           mkdir ../build
-          cp -TR dist ../build
+          cp -TR ./dist ../build
           tar -cvf deploy.tar ../build/
 
   deploy-sever:
