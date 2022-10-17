@@ -85,9 +85,7 @@ jobs:
             tar -xvf deploy.tar
             rm deploy.tar
             cd docker
-            docker stop nestjs-backend-app
-            docker rm nestjs-backend-app
-            docker rmi nestjs-backend
+
             docker build -t nestjs-backend .
             docker run -d --name nestjs-backend-app -p 8080:8080 nestjs-backend
 
