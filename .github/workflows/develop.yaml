@@ -84,8 +84,10 @@ jobs:
             ls | grep -v deploy.tar | xargs rm -rfv
             tar -xvf deploy.tar
             rm deploy.tar
-            cd build
-            export NVM_DIR=~/.nvm
-            source ~/.nvm/nvm.sh
-            nvm use 16
-            npm ci
+            cd docker
+            docker stop nestjs-backend-app
+            docker rm nestjs-backend-app
+            docker rmi nestjs-backend
+            docker build -t nestjs-backend .
+            docker run -d --name nestjs-backend-app -p 8080:8080 nestjs-backend
+
