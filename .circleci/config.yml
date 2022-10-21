@@ -95,9 +95,9 @@ workflows:
       - dependencies:
           requires:
             - checkout
-      - lint:
-          requires:
-            - dependencies
+#      - lint:
+#          requires:
+#            - dependencies
 #      - test:
 #          requires:
 #            - lint
