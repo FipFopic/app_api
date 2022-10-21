@@ -4,7 +4,7 @@ jobs:
   checkout:
     working_directory: ~/app_api
     docker:
-      - image: cimg/node:18
+      - image: cimg/node:18.11.0
     steps:
       - checkout
       - save_cache:
@@ -14,7 +14,7 @@ jobs:
   dependencies:
     working_directory: ~/app_api
     docker:
-      - image: cimg/node:18
+      - image: cimg/node:18.11.0
     steps:
       - restore_cache:
           key: v0-repo-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
@@ -30,7 +30,7 @@ jobs:
   lint:
     working_directory: ~/app_api
     docker:
-      - image: cimg/node:18
+      - image: cimg/node:18.11.0
     steps:
       - restore_cache:
           key: v0-repo-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
@@ -45,7 +45,7 @@ jobs:
 #  test:
 #    working_directory: ~/app_api
 #    docker:
-#      - image: cimg/node:18
+#      - image: cimg/node:18.11.0
 #      - image: cimg/postgres:14.5
 #        environment:
 #          POSTGRES_HOST: localhost
@@ -73,7 +73,7 @@ jobs:
   build:
     working_directory: ~/app_api
     docker:
-      - image: cimg/node:18
+      - image: cimg/node:18.11.0
     steps:
       - restore_cache:
           key: v0-repo-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
